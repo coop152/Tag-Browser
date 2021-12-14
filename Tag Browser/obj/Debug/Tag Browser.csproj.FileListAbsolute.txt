@@ -14,3 +14,4 @@ C:\Users\Kyle\source\Tag Browser\Tag Browser\obj\Debug\Tag Browser.csproj.CoreCo
 C:\Users\Kyle\source\Tag Browser\Tag Browser\obj\Debug\Tag Browser.csproj.CopyComplete
 C:\Users\Kyle\source\Tag Browser\Tag Browser\obj\Debug\Tag Browser.exe
 C:\Users\Kyle\source\Tag Browser\Tag Browser\obj\Debug\Tag Browser.pdb
+C:\Users\Kyle\source\Tag Browser\Tag Browser\obj\Debug\Tag Browser.csproj.AssemblyReference.cache
