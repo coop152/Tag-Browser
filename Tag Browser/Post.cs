@@ -1,5 +1,6 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Tag_Browser
 {
@@ -7,45 +8,18 @@ namespace Tag_Browser
     {
         public string Path { get; set; }
         public string[] Tags { get; set; }
-        public string Artist
-        {
-            get
-            {
-                string[] directories = Path.Split(System.IO.Path.DirectorySeparatorChar);
-                string folderName = directories[directories.Length - 2];
-                if (folderName.EndsWith("-q"))
-                {
-                    folderName = folderName.Remove(folderName.Length - 2);
-                }
-
-                return folderName;
-            }
-        }
-        public int PostNumber
-        {
-            get
-            {
-                try
-                {
-                    int indexSlash = Path.LastIndexOf('\\');
-                    int indexDot = Path.LastIndexOf('.');
-                    int diff = indexDot - indexSlash - 1;
-                    return int.Parse(Path.Substring(indexSlash + 1, diff));
-                }
-                catch { return 0; }
-            }
-        }
-        public Post(string path, string[] tags)
-        {
-            Path = path;
-            Tags = tags;
-        }
+        public string Artist { get; set; }
+        public int PostNumber { get; set; }
         public Post(string path)
         {
             Path = path;
             try
             {
-                Tags = File.ReadAllLines(path + ".txt");
+                string json = File.ReadAllText(path + ".json");
+                JObject deserialised = JsonConvert.DeserializeObject<JObject>(json);
+                Artist = (string)deserialised["artist"];
+                Tags = deserialised["tags"].ToObject<string[]>();
+                PostNumber = (int)deserialised["id"];
             }
             catch
             {
