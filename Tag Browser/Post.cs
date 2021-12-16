@@ -16,13 +16,15 @@ namespace Tag_Browser
             try
             {
                 string json = File.ReadAllText(path + ".json");
-                JObject deserialised = JsonConvert.DeserializeObject<JObject>(json);
+                JObject deserialised = JObject.Parse(json);
+                PostNumber = (int)deserialised["id"];
                 Artist = (string)deserialised["artist"];
                 Tags = deserialised["tags"].ToObject<string[]>();
-                PostNumber = (int)deserialised["id"];
             }
             catch
             {
+                PostNumber = 0;
+                Artist = "No Artist";
                 Tags = new string[0];
             }
         }
